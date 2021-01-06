@@ -1,0 +1,110 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scenes/Board/Board.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Tile/Tile.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=3]
+
+[node name="Board" type="Node2D"]
+script = ExtResource( 1 )
+playerInitPos = Vector2( 2, 1 )
+
+[node name="Tiles" type="Node2D" parent="."]
+position = Vector2( 320, 192 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Row" type="Node2D" parent="Tiles"]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Tile" parent="Tiles/Row" instance=ExtResource( 2 )]
+
+[node name="Tile2" parent="Tiles/Row" instance=ExtResource( 2 )]
+position = Vector2( 64, 0 )
+
+[node name="Tile3" parent="Tiles/Row" instance=ExtResource( 2 )]
+position = Vector2( 128, 0 )
+
+[node name="Tile4" parent="Tiles/Row" instance=ExtResource( 2 )]
+position = Vector2( 192, 0 )
+
+[node name="Tile5" parent="Tiles/Row" instance=ExtResource( 2 )]
+position = Vector2( 256, 0 )
+
+[node name="Tile6" parent="Tiles/Row" instance=ExtResource( 2 )]
+position = Vector2( 320, 0 )
+
+[node name="Row2" type="Node2D" parent="Tiles"]
+position = Vector2( 0, 64 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Tile" parent="Tiles/Row2" instance=ExtResource( 2 )]
+
+[node name="Tile2" parent="Tiles/Row2" instance=ExtResource( 2 )]
+position = Vector2( 64, 0 )
+
+[node name="Tile3" parent="Tiles/Row2" instance=ExtResource( 2 )]
+position = Vector2( 128, 0 )
+
+[node name="Tile4" parent="Tiles/Row2" instance=ExtResource( 2 )]
+position = Vector2( 192, 0 )
+
+[node name="Tile5" parent="Tiles/Row2" instance=ExtResource( 2 )]
+position = Vector2( 256, 0 )
+
+[node name="Tile6" parent="Tiles/Row2" instance=ExtResource( 2 )]
+position = Vector2( 320, 0 )
+
+[node name="Row3" type="Node2D" parent="Tiles"]
+position = Vector2( 0, 128 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Tile" parent="Tiles/Row3" instance=ExtResource( 2 )]
+
+[node name="Tile2" parent="Tiles/Row3" instance=ExtResource( 2 )]
+position = Vector2( 64, 0 )
+
+[node name="Tile3" parent="Tiles/Row3" instance=ExtResource( 2 )]
+position = Vector2( 128, 0 )
+
+[node name="Tile4" parent="Tiles/Row3" instance=ExtResource( 2 )]
+position = Vector2( 192, 0 )
+
+[node name="Tile5" parent="Tiles/Row3" instance=ExtResource( 2 )]
+position = Vector2( 256, 0 )
+
+[node name="Tile6" parent="Tiles/Row3" instance=ExtResource( 2 )]
+position = Vector2( 320, 0 )
+
+[node name="Row4" type="Node2D" parent="Tiles"]
+position = Vector2( 0, 192 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Tile" parent="Tiles/Row4" instance=ExtResource( 2 )]
+
+[node name="Tile2" parent="Tiles/Row4" instance=ExtResource( 2 )]
+position = Vector2( 64, 0 )
+
+[node name="Tile3" parent="Tiles/Row4" instance=ExtResource( 2 )]
+position = Vector2( 128, 0 )
+
+[node name="Tile4" parent="Tiles/Row4" instance=ExtResource( 2 )]
+position = Vector2( 192, 0 )
+
+[node name="Tile5" parent="Tiles/Row4" instance=ExtResource( 2 )]
+position = Vector2( 256, 0 )
+
+[node name="Tile6" parent="Tiles/Row4" instance=ExtResource( 2 )]
+position = Vector2( 320, 0 )
+
+[node name="Player" parent="." instance=ExtResource( 3 )]
+position = Vector2( 320, 192 )
+scale = Vector2( 2, 2 )

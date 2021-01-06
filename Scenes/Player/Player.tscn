@@ -1,0 +1,52 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://Assets/Sprites/Player/adventurer-attack1-00.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Sprites/Player/adventurer-idle-2-00.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Sprites/Player/adventurer-attack3-05.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Sprites/Player/adventurer-attack3-03.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Sprites/Player/adventurer-attack3-04.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Sprites/Player/adventurer-attack3-02.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Sprites/Player/adventurer-attack1-04.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Sprites/Player/adventurer-attack1-02.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Sprites/Player/adventurer-attack2-00.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Sprites/Player/adventurer-attack1-03.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Sprites/Player/adventurer-idle-2-02.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Sprites/Player/adventurer-idle-2-03.png" type="Texture" id=12]
+[ext_resource path="res://Assets/Sprites/Player/adventurer-idle-2-01.png" type="Texture" id=13]
+[ext_resource path="res://Scenes/Player/Player.gd" type="Script" id=14]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 13 ), ExtResource( 11 ), ExtResource( 12 ) ],
+"loop": true,
+"name": "Default",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "Stance",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "Dash",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 8 ), ExtResource( 10 ), ExtResource( 7 ), ExtResource( 9 ) ],
+"loop": true,
+"name": "Special",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 6 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "Attack",
+"speed": 20.0
+} ]
+
+[node name="Player" type="Node2D"]
+script = ExtResource( 14 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0, -16 )
+frames = SubResource( 1 )
+animation = "Default"
