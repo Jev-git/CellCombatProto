@@ -9,10 +9,10 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Node2D",
-"class": "Board",
+"base": "Room",
+"class": "FirstRoom",
 "language": "GDScript",
-"path": "res://Scenes/Board/Board.gd"
+"path": "res://Scenes/Room/FirstRoom.gd"
 }, {
 "base": "Node2D",
 "class": "Player",
@@ -20,20 +20,26 @@ _global_script_classes=[ {
 "path": "res://Scenes/Player/Player.gd"
 }, {
 "base": "Node2D",
+"class": "Room",
+"language": "GDScript",
+"path": "res://Scenes/Room/Room.gd"
+}, {
+"base": "Node2D",
 "class": "Tile",
 "language": "GDScript",
 "path": "res://Scenes/Tile/Tile.gd"
 } ]
 _global_script_class_icons={
-"Board": "",
+"FirstRoom": "",
 "Player": "",
+"Room": "",
 "Tile": ""
 }
 
 [application]
 
 config/name="CellCombatProto"
-run/main_scene="res://Scenes/Board/Board.tscn"
+run/main_scene="res://Scenes/Room/Room.tscn"
 
 [display]
 

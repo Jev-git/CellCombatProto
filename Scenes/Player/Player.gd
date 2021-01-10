@@ -1,7 +1,7 @@
 extends Node2D
 class_name Player
 
-onready var board = get_parent()
+onready var room = get_parent()
 onready var animS: AnimatedSprite = $AnimatedSprite
 
 onready var boardPos: Vector2
@@ -27,6 +27,7 @@ func handle_input() -> void:
 		# Special attack
 		if Input.is_action_just_pressed("ui_attack"):
 			animS.play("Special")
+			_flash_atk_on_tile("Special")
 			acceptingInput = false
 		elif Input.is_action_just_pressed("ui_right"):
 			if facingRight: # Dash
@@ -45,6 +46,7 @@ func handle_input() -> void:
 	# Attack
 	if Input.is_action_just_pressed("ui_attack"):
 		animS.play("Attack")
+		_flash_atk_on_tile("Attack")
 		acceptingInput = false
 		return
 	
@@ -60,12 +62,29 @@ func handle_input() -> void:
 	animS.play("Default")
 
 func set_player_pos(_boardPos: Vector2) -> void:
-	var targetTile: Tile = board.get_tile(_boardPos)
+	var targetTile: Tile = room.get_tile(_boardPos)
 	if targetTile:
-		if targetTile.tileType in [Tile.TileType.PLAYER, Tile.TileType.COMMON]:
+		if targetTile.type in [Tile.TILE_TYPE.PLAYER, Tile.TILE_TYPE.COMMON]:
 			self.global_position = targetTile.global_position
 			boardPos = _boardPos
 
 func set_facing_direction(_facingRight: bool) -> void:
 	animS.flip_h = !_facingRight
 	facingRight = _facingRight
+
+func _flash_atk_on_tile(_animName):
+	match _animName:
+		"Attack":
+			var aheadPos = Vector2(boardPos.x, boardPos.y + (1 if facingRight else -1))
+			var aheadTile = room.get_tile(aheadPos)
+			if aheadTile:
+				aheadTile.flash(Tile.TILE_TYPE.PLAYER)
+		"Special":
+			var aheadPos = Vector2(boardPos.x, boardPos.y + (1 if facingRight else -1))
+			var aheadTile = room.get_tile(aheadPos)
+			if aheadTile:
+				aheadTile.flash(Tile.TILE_TYPE.PLAYER)
+			aheadPos = Vector2(boardPos.x, boardPos.y + (2 if facingRight else -2))
+			aheadTile = room.get_tile(aheadPos)
+			if aheadTile:
+				aheadTile.flash(Tile.TILE_TYPE.PLAYER)

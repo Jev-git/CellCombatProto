@@ -10,3 +10,8 @@
     * Atk after a set amount of time, or when player is in front of them
 * Mobile:
     * Move in col
+
+# Room
+* Do a first room like in Hades
+    * You can move around, stance, atk, special
+    * Have some destructibles to try your atk on
