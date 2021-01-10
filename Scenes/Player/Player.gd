@@ -27,7 +27,7 @@ func handle_input() -> void:
 		# Special attack
 		if Input.is_action_just_pressed("ui_attack"):
 			animS.play("Special")
-			_flash_atk_on_tile("Special")
+			_deal_dmg_to_tile("Special")
 			acceptingInput = false
 		elif Input.is_action_just_pressed("ui_right"):
 			if facingRight: # Dash
@@ -46,7 +46,7 @@ func handle_input() -> void:
 	# Attack
 	if Input.is_action_just_pressed("ui_attack"):
 		animS.play("Attack")
-		_flash_atk_on_tile("Attack")
+		_deal_dmg_to_tile("Attack")
 		acceptingInput = false
 		return
 	
@@ -72,19 +72,19 @@ func set_facing_direction(_facingRight: bool) -> void:
 	animS.flip_h = !_facingRight
 	facingRight = _facingRight
 
-func _flash_atk_on_tile(_animName):
+func _deal_dmg_to_tile(_animName: String) -> void:
 	match _animName:
 		"Attack":
 			var aheadPos = Vector2(boardPos.x, boardPos.y + (1 if facingRight else -1))
 			var aheadTile = room.get_tile(aheadPos)
 			if aheadTile:
-				aheadTile.flash(Tile.TILE_TYPE.PLAYER)
+				aheadTile.take_dmg(Tile.TILE_TYPE.PLAYER)
 		"Special":
 			var aheadPos = Vector2(boardPos.x, boardPos.y + (1 if facingRight else -1))
 			var aheadTile = room.get_tile(aheadPos)
 			if aheadTile:
-				aheadTile.flash(Tile.TILE_TYPE.PLAYER)
+				aheadTile.take_dmg(Tile.TILE_TYPE.PLAYER)
 			aheadPos = Vector2(boardPos.x, boardPos.y + (2 if facingRight else -2))
 			aheadTile = room.get_tile(aheadPos)
 			if aheadTile:
-				aheadTile.flash(Tile.TILE_TYPE.PLAYER)
+				aheadTile.take_dmg(Tile.TILE_TYPE.PLAYER)

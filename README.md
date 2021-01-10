@@ -14,4 +14,4 @@
 # Room
 * Do a first room like in Hades
     * You can move around, stance, atk, special
-    * Have some destructibles to try your atk on
+    * Have some chests to try your atk on
