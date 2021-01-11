@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node2D",
+"class": "Chest",
+"language": "GDScript",
+"path": "res://Scenes/Props/Chest/Chest.gd"
+}, {
 "base": "Room",
 "class": "FirstRoom",
 "language": "GDScript",
@@ -30,6 +35,7 @@ _global_script_classes=[ {
 "path": "res://Scenes/Tile/Tile.gd"
 } ]
 _global_script_class_icons={
+"Chest": "",
 "FirstRoom": "",
 "Player": "",
 "Room": "",

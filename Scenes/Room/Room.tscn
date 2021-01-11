@@ -105,10 +105,12 @@ position = Vector2( 256, 0 )
 [node name="Tile6" parent="Board/Row4" instance=ExtResource( 1 )]
 position = Vector2( 320, 0 )
 
-[node name="Player" parent="." instance=ExtResource( 2 )]
+[node name="Units" type="Node2D" parent="."]
+
+[node name="Player" parent="Units" instance=ExtResource( 2 )]
 position = Vector2( 384, 256 )
 scale = Vector2( 2, 2 )
 
-[node name="Chest" parent="." instance=ExtResource( 4 )]
+[node name="Chest" parent="Units" instance=ExtResource( 4 )]
 position = Vector2( 448, 320 )
 scale = Vector2( 1.5, 1.5 )

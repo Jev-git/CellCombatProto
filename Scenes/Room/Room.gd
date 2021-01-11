@@ -1,31 +1,48 @@
 extends Node2D
 class_name Room
 
-# Override these value in the _init() function of child rooms
+# Override these values in the _init() function of child rooms
 # ==========================================
-var tilesType: Array = [
-	[-1, 0, 1, 2, 3, 0],
-	[0, 2, 2, 3, 3, 0],
-	[0, 2, 2, 3, 3, 0],
-	[0, 0, 0, 0, 0, 0]
-]
-var playerInitPos: Vector2 = Vector2(1, 1)
+onready var boardLayout: Array
+onready var unitsInitPos: Array
 # ==========================================
 
 onready var board = $Board
-onready var player: Player = $Player
+onready var units = $Units
+
+signal tile_damaged
 
 func _ready():
+	# Set up tiles from boardLayout
 	for i_row in range(board.get_child_count()):
 		var row = board.get_child(i_row)
 		for i_col in range(row.get_child_count()):
 			var tile: Tile = row.get_child(i_col)
-			tile.type = tilesType[i_row][i_col]
+			tile.type = boardLayout[i_row][i_col]
 	
-	player.set_player_pos(playerInitPos)
-	$Chest.set_parent_tile(get_tile(Vector2(2, 2)))
+	# Set up units initial board position
+	for i in range(units.get_child_count()):
+		var unit = units.get_child(i)
+		unit.set_board_pos(unitsInitPos[i])
+		connect("tile_damaged", unit, "_on_tile_damaged")
 
 func get_tile(tilePos: Vector2) -> Tile:
-	if tilePos.x < 0 or tilePos.x > tilesType.size() or tilePos.y < 0 or tilePos.y > tilesType[0].size():
+	if tilePos.x < 0 or tilePos.x > boardLayout.size() or tilePos.y < 0 or tilePos.y > boardLayout[0].size():
 		return null
 	return board.get_child(tilePos.x).get_child(tilePos.y)
+
+func deal_damage_to_tile(tilePos: Vector2, isPlayerDmg: bool = false) -> void:
+	var tile: Tile = get_tile(tilePos)
+	if tile:
+		tile.flash(isPlayerDmg)
+		emit_signal("tile_damaged", tilePos, isPlayerDmg)
+
+func is_tile_empty(tilePos: Vector2) -> bool:
+	var tile: Tile = get_tile(tilePos)
+	if !tile:
+		return false
+	else:
+		for unit in units.get_children():
+			if unit.boardPos == tilePos:
+				return false
+		return true
