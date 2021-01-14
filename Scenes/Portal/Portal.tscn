@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Assets/Sprites/Portal/pipo-gate01d192.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/Portal/Portal.gd" type="Script" id=2]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Default"
+length = 1.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 14 ]
+}
+
+[node name="Portal" type="Node2D"]
+scale = Vector2( 0.3, 0.3 )
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+vframes = 3
+hframes = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Default = SubResource( 1 )

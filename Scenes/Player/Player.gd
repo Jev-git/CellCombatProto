@@ -1,12 +1,14 @@
-extends Node2D
+extends Unit
 class_name Player
 
-onready var room = get_parent().get_parent()
 onready var animS: AnimatedSprite = $AnimatedSprite
 
-onready var boardPos: Vector2
 onready var acceptingInput: bool = true
 onready var facingRight: bool = true
+
+func _init():
+	unitType = UNIT_TYPE.PLAYER
+	canShareTile = false
 
 func _ready():
 	animS.connect("animation_finished", self, "_on_anim_finished")
@@ -60,13 +62,6 @@ func _handle_input() -> void:
 	elif Input.is_action_just_pressed("ui_down"):
 		set_board_pos(Vector2(boardPos.x + 1, boardPos.y))
 	animS.play("Default")
-
-func set_board_pos(_boardPos: Vector2) -> void:
-	if room.is_tile_empty(_boardPos):
-		var targetTile: Tile = room.get_tile(_boardPos)
-		if targetTile.type in [Tile.TILE_TYPE.PLAYER, Tile.TILE_TYPE.COMMON]:
-			self.global_position = targetTile.global_position
-			boardPos = _boardPos
 
 func _set_facing_direction(_facingRight: bool) -> void:
 	animS.flip_h = !_facingRight

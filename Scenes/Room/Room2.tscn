@@ -1,0 +1,149 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Scenes/Room/Room2.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Tile/Tile.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Props/Chest/Chest.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Portal/Portal.tscn" type="PackedScene" id=5]
+
+[node name="Room" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Board" type="Node2D" parent="."]
+position = Vector2( 320, 192 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Row" type="Node2D" parent="Board"]
+position = Vector2( -64, 0 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Tile" parent="Board/Row" instance=ExtResource( 2 )]
+
+[node name="Tile2" parent="Board/Row" instance=ExtResource( 2 )]
+position = Vector2( 64, 0 )
+
+[node name="Tile3" parent="Board/Row" instance=ExtResource( 2 )]
+position = Vector2( 128, 0 )
+
+[node name="Tile4" parent="Board/Row" instance=ExtResource( 2 )]
+position = Vector2( 192, 0 )
+
+[node name="Tile5" parent="Board/Row" instance=ExtResource( 2 )]
+position = Vector2( 256, 0 )
+
+[node name="Tile6" parent="Board/Row" instance=ExtResource( 2 )]
+position = Vector2( 320, 0 )
+
+[node name="Tile7" parent="Board/Row" instance=ExtResource( 2 )]
+position = Vector2( 384, 0 )
+
+[node name="Tile8" parent="Board/Row" instance=ExtResource( 2 )]
+position = Vector2( 448, 0 )
+
+[node name="Row2" type="Node2D" parent="Board"]
+position = Vector2( -64, 64 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Tile" parent="Board/Row2" instance=ExtResource( 2 )]
+
+[node name="Tile2" parent="Board/Row2" instance=ExtResource( 2 )]
+position = Vector2( 64, 0 )
+
+[node name="Tile3" parent="Board/Row2" instance=ExtResource( 2 )]
+position = Vector2( 128, 0 )
+
+[node name="Tile4" parent="Board/Row2" instance=ExtResource( 2 )]
+position = Vector2( 192, 0 )
+
+[node name="Tile5" parent="Board/Row2" instance=ExtResource( 2 )]
+position = Vector2( 256, 0 )
+
+[node name="Tile6" parent="Board/Row2" instance=ExtResource( 2 )]
+position = Vector2( 320, 0 )
+
+[node name="Tile7" parent="Board/Row2" instance=ExtResource( 2 )]
+position = Vector2( 384, 0 )
+
+[node name="Tile8" parent="Board/Row2" instance=ExtResource( 2 )]
+position = Vector2( 448, 0 )
+
+[node name="Row3" type="Node2D" parent="Board"]
+position = Vector2( -64, 128 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Tile" parent="Board/Row3" instance=ExtResource( 2 )]
+
+[node name="Tile2" parent="Board/Row3" instance=ExtResource( 2 )]
+position = Vector2( 64, 0 )
+
+[node name="Tile3" parent="Board/Row3" instance=ExtResource( 2 )]
+position = Vector2( 128, 0 )
+
+[node name="Tile4" parent="Board/Row3" instance=ExtResource( 2 )]
+position = Vector2( 192, 0 )
+
+[node name="Tile5" parent="Board/Row3" instance=ExtResource( 2 )]
+position = Vector2( 256, 0 )
+
+[node name="Tile6" parent="Board/Row3" instance=ExtResource( 2 )]
+position = Vector2( 320, 0 )
+
+[node name="Tile7" parent="Board/Row3" instance=ExtResource( 2 )]
+position = Vector2( 384, 0 )
+
+[node name="Tile8" parent="Board/Row3" instance=ExtResource( 2 )]
+position = Vector2( 448, 0 )
+
+[node name="Row4" type="Node2D" parent="Board"]
+position = Vector2( -64, 192 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Tile" parent="Board/Row4" instance=ExtResource( 2 )]
+
+[node name="Tile2" parent="Board/Row4" instance=ExtResource( 2 )]
+position = Vector2( 64, 0 )
+
+[node name="Tile3" parent="Board/Row4" instance=ExtResource( 2 )]
+position = Vector2( 128, 0 )
+
+[node name="Tile4" parent="Board/Row4" instance=ExtResource( 2 )]
+position = Vector2( 192, 0 )
+
+[node name="Tile5" parent="Board/Row4" instance=ExtResource( 2 )]
+position = Vector2( 256, 0 )
+
+[node name="Tile6" parent="Board/Row4" instance=ExtResource( 2 )]
+position = Vector2( 320, 0 )
+
+[node name="Tile7" parent="Board/Row4" instance=ExtResource( 2 )]
+position = Vector2( 384, 0 )
+
+[node name="Tile8" parent="Board/Row4" instance=ExtResource( 2 )]
+position = Vector2( 448, 0 )
+
+[node name="Units" type="Node2D" parent="."]
+
+[node name="Player" parent="Units" instance=ExtResource( 3 )]
+position = Vector2( 384, 256 )
+scale = Vector2( 2, 2 )
+initBoardPos = Vector2( 1, 2 )
+
+[node name="Chest" parent="Units" instance=ExtResource( 4 )]
+position = Vector2( 448, 320 )
+scale = Vector2( 1.5, 1.5 )
+initBoardPos = Vector2( 2, 3 )
+
+[node name="Portal" parent="Units" instance=ExtResource( 5 )]
+position = Vector2( 640, 256 )
+initBoardPos = Vector2( 1, 6 )
+nextRoom = "Room1"

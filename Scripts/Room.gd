@@ -4,12 +4,12 @@ class_name Room
 # Override these values in the _init() function of child rooms
 # ==========================================
 onready var boardLayout: Array
-onready var unitsInitPos: Array
 # ==========================================
 
 onready var board = $Board
 onready var units = $Units
 
+signal unit_moved
 signal tile_damaged
 
 func _ready():
@@ -21,9 +21,8 @@ func _ready():
 			tile.type = boardLayout[i_row][i_col]
 	
 	# Set up units initial board position
-	for i in range(units.get_child_count()):
-		var unit = units.get_child(i)
-		unit.set_board_pos(unitsInitPos[i])
+	for unit in units.get_children():
+		unit.set_board_pos(unit.initBoardPos)
 		connect("tile_damaged", unit, "_on_tile_damaged")
 
 func get_tile(tilePos: Vector2) -> Tile:
@@ -43,6 +42,6 @@ func is_tile_empty(tilePos: Vector2) -> bool:
 		return false
 	else:
 		for unit in units.get_children():
-			if unit.boardPos == tilePos:
+			if !unit.canShareTile and unit.boardPos == tilePos:
 				return false
 		return true

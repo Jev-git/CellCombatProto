@@ -15,3 +15,5 @@
 * Do a first room like in Hades
     * You can move around, stance, atk, special
     * Have some chests to try your atk on
+    * Have a portal to the next room
+    * Drop down transition when entering and exiting a room
