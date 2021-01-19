@@ -57,7 +57,7 @@ _global_script_class_icons={
 [application]
 
 config/name="CellCombatProto"
-run/main_scene="res://Scenes/Room/Room1.tscn"
+run/main_scene="res://Scenes/Room/RoomBossTest.tscn"
 
 [display]
 

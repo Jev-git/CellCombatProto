@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://Scenes/Room/Room2.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Room/RoomBossTest.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Tile/Tile.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Scenes/Props/Chest/Chest.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Scenes/Portal/Portal.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Assets/Sprites/Background/Pink Purple Rock/Background.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Sprites/Background/Pink Purple Rock/Ground Front.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Sprites/Background/Pink Purple Rock/Rocks.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Sprites/Background/Pink Purple Rock/Ground.png" type="Texture" id=10]
 
 [node name="Room" type="Node2D"]
 script = ExtResource( 1 )
@@ -16,7 +18,6 @@ __meta__ = {
 }
 
 [node name="Row" type="Node2D" parent="Board"]
-position = Vector2( -64, 0 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -38,14 +39,8 @@ position = Vector2( 256, 0 )
 [node name="Tile6" parent="Board/Row" instance=ExtResource( 2 )]
 position = Vector2( 320, 0 )
 
-[node name="Tile7" parent="Board/Row" instance=ExtResource( 2 )]
-position = Vector2( 384, 0 )
-
-[node name="Tile8" parent="Board/Row" instance=ExtResource( 2 )]
-position = Vector2( 448, 0 )
-
 [node name="Row2" type="Node2D" parent="Board"]
-position = Vector2( -64, 64 )
+position = Vector2( 0, 64 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -67,14 +62,8 @@ position = Vector2( 256, 0 )
 [node name="Tile6" parent="Board/Row2" instance=ExtResource( 2 )]
 position = Vector2( 320, 0 )
 
-[node name="Tile7" parent="Board/Row2" instance=ExtResource( 2 )]
-position = Vector2( 384, 0 )
-
-[node name="Tile8" parent="Board/Row2" instance=ExtResource( 2 )]
-position = Vector2( 448, 0 )
-
 [node name="Row3" type="Node2D" parent="Board"]
-position = Vector2( -64, 128 )
+position = Vector2( 0, 128 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -96,14 +85,8 @@ position = Vector2( 256, 0 )
 [node name="Tile6" parent="Board/Row3" instance=ExtResource( 2 )]
 position = Vector2( 320, 0 )
 
-[node name="Tile7" parent="Board/Row3" instance=ExtResource( 2 )]
-position = Vector2( 384, 0 )
-
-[node name="Tile8" parent="Board/Row3" instance=ExtResource( 2 )]
-position = Vector2( 448, 0 )
-
 [node name="Row4" type="Node2D" parent="Board"]
-position = Vector2( -64, 192 )
+position = Vector2( 0, 192 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -125,25 +108,55 @@ position = Vector2( 256, 0 )
 [node name="Tile6" parent="Board/Row4" instance=ExtResource( 2 )]
 position = Vector2( 320, 0 )
 
-[node name="Tile7" parent="Board/Row4" instance=ExtResource( 2 )]
-position = Vector2( 384, 0 )
-
-[node name="Tile8" parent="Board/Row4" instance=ExtResource( 2 )]
-position = Vector2( 448, 0 )
-
 [node name="Units" type="Node2D" parent="."]
 
 [node name="Player" parent="Units" instance=ExtResource( 3 )]
 position = Vector2( 384, 256 )
 scale = Vector2( 2, 2 )
-INIT_BOARD_POS = Vector2( 1, 2 )
+INIT_BOARD_POS = Vector2( 1, 1 )
 
-[node name="Chest" parent="Units" instance=ExtResource( 4 )]
-position = Vector2( 448, 320 )
-scale = Vector2( 1.5, 1.5 )
-INIT_BOARD_POS = Vector2( 2, 3 )
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+scale = Vector2( 2, 2 )
+transform = Transform2D( 2, 0, 0, 2, 0, 0 )
 
-[node name="Portal" parent="Units" instance=ExtResource( 5 )]
-position = Vector2( 640, 256 )
-INIT_BOARD_POS = Vector2( 1, 6 )
-nextRoom = "Room1"
+[node name="Background" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( -0.5, 0 )
+motion_mirroring = Vector2( 480, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/Background"]
+texture = ExtResource( 7 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 480, 240 )
+
+[node name="Ground" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2( 0, 32 )
+motion_scale = Vector2( 2, 0 )
+motion_mirroring = Vector2( 480, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/Ground"]
+texture = ExtResource( 10 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 480, 240 )
+
+[node name="Ground Front" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2( 0, 32 )
+motion_scale = Vector2( 1, 0 )
+motion_mirroring = Vector2( 480, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/Ground Front"]
+texture = ExtResource( 8 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 480, 240 )
+
+[node name="Rocks" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0, 1 )
+motion_mirroring = Vector2( 0, 240 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/Rocks"]
+texture = ExtResource( 9 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 480, 240 )

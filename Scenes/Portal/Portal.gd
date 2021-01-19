@@ -7,8 +7,8 @@ export var nextRoom: String
 onready var animP: AnimationPlayer = $AnimationPlayer
 
 func _init():
-	unitType = UNIT_TYPE.PORTAL
-	canShareTile = true
+	m_iUnitType = UNIT_TYPE.PORTAL
+	m_bCanShareTile = true
 
 func _ready():
 	assert(nextRoom)

@@ -4,8 +4,8 @@ class_name Chest
 onready var animS: AnimatedSprite = $AnimatedSprite
 
 func _init():
-	unitType = UNIT_TYPE.PROP
-	canShareTile = false
+	m_iUnitType = UNIT_TYPE.PROP
+	m_bCanShareTile = false
 
 func _ready():
 	animS.play("Default")

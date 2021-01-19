@@ -7,7 +7,7 @@ onready var m_aBoardLayout: Array
 # ==========================================
 
 onready var m_nBoard = $Board
-onready var n_nUnits = $Units
+onready var m_nUnits = $Units
 
 signal unit_moved
 signal tile_damaged
@@ -21,8 +21,8 @@ func _ready():
 			tile.type = m_aBoardLayout[i_row][i_col]
 	
 	# Set up units initial board position
-	for unit in n_nUnits.get_children():
-		unit.set_board_pos(unit.initBoardPos)
+	for unit in m_nUnits.get_children():
+		unit.set_board_pos(unit.INIT_BOARD_POS)
 		connect("tile_damaged", unit, "_on_tile_damaged")
 
 func get_tile(tilePos: Vector2) -> Tile:
@@ -41,7 +41,7 @@ func is_tile_empty(tilePos: Vector2) -> bool:
 	if !tile:
 		return false
 	else:
-		for unit in n_nUnits.get_children():
-			if !unit.canShareTile and unit.boardPos == tilePos:
+		for unit in m_nUnits.get_children():
+			if !unit.m_bCanShareTile and unit.m_vBoardPos == tilePos:
 				return false
 		return true
