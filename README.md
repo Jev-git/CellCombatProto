@@ -1,5 +1,4 @@
 # Player states left
-* Special take time to charge before you can activate it
 * Deal damage (atk: 1 square ahead, special: 2 square ahead)
 * Take damage
 * Sub weapon (like gem in Hades)

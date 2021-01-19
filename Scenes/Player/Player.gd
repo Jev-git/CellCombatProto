@@ -2,9 +2,13 @@ extends Unit
 class_name Player
 
 onready var m_nAnimS: AnimatedSprite = $AnimatedSprite
+onready var m_nAnimP: AnimationPlayer = $AnimationPlayer
+onready var m_nStanceTimer: Timer = $StanceTimer
 
 onready var m_bAcceptingInput: bool = true
 onready var m_bFacingRight: bool = true
+onready var m_bIsInStance: bool = false
+onready var m_bIsStanceCharged: bool = false
 
 func _init():
 	m_iUnitType = UNIT_TYPE.PLAYER
@@ -12,6 +16,7 @@ func _init():
 
 func _ready():
 	m_nAnimS.connect("animation_finished", self, "_on_anim_finished")
+	m_nStanceTimer.connect("timeout", self, "_on_stance_timer_timeout")
 
 func _process(delta):
 	_handle_input()
@@ -26,20 +31,32 @@ func _handle_input() -> void:
 	
 	# In Stance
 	if Input.is_action_pressed("ui_stance"):
-		# Special attack
-		if Input.is_action_just_pressed("ui_attack"):
-			m_nAnimS.play("Special")
-			_deal_dmg_to_tile("Special")
-			m_bAcceptingInput = false
-		elif Input.is_action_just_pressed("ui_right"):
-			if !m_bFacingRight: # Turn
-				_set_facing_direction(true)
-		elif Input.is_action_just_pressed("ui_left"):
-			if m_bFacingRight: # Turn
-				_set_facing_direction(false)
-		else:
+		if !m_bIsInStance: # Enter Stance
+			m_bIsInStance = true
+			m_nStanceTimer.start()
 			m_nAnimS.play("Stance")
+			m_nAnimP.play("Stance")
+		elif m_bIsStanceCharged:
+			# Special attack (and leave stance)
+			if Input.is_action_just_pressed("ui_attack"):
+				m_bAcceptingInput = false
+				m_bIsInStance = false
+				m_nAnimS.play("Special")
+				m_nAnimP.play("Default")
+				_deal_dmg_to_tile("Special")
+			elif Input.is_action_just_pressed("ui_right"):
+				if !m_bFacingRight: # Turn
+					_set_facing_direction(true)
+			elif Input.is_action_just_pressed("ui_left"):
+				if m_bFacingRight: # Turn
+					_set_facing_direction(false)
 		return
+	
+	if m_bIsInStance: # Leave Stance
+		m_bIsInStance = false
+		m_bIsStanceCharged = false
+		m_nAnimP.play("Default")
+		m_nStanceTimer.stop()
 	
 	# Attack
 	if Input.is_action_just_pressed("ui_attack"):
@@ -77,3 +94,6 @@ func _deal_dmg_to_tile(_animName: String) -> void:
 func _on_tile_damaged(tilePos: Vector2, isPlayerDmg: bool) -> void:
 	if tilePos == m_vBoardPos:
 		print("Player received damage")
+
+func _on_stance_timer_timeout():
+	m_bIsStanceCharged = true
