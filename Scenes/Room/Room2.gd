@@ -1,7 +1,7 @@
 extends Room
 
 func _init():
-	boardLayout = [
+	m_aBoardLayout = [
 		[-1, -1, -1, -1, -1, -1, -1, -1],
 		[0, 2, 2, 2, 2, 2, 2, 0],
 		[0, 2, 2, 2, 2, 2, 2, 0],

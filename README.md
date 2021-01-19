@@ -17,3 +17,10 @@
     * Have some chests to try your atk on
     * Have a portal to the next room
     * Drop down transition when entering and exiting a room
+
+# Đang làm dở
+* Turret:
+    * Find laser assset
+    * Shoot animation
+    * Turret take damage
+* Maybe just start off making a boss?

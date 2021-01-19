@@ -1,10 +1,15 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scenes/Room/Room1.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Tile/Tile.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Props/Chest/Chest.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Portal/Portal.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Enemies/Mobs/Turret/Turret.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Assets/Sprites/Background/Pink Purple Rock/Background.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Sprites/Background/Pink Purple Rock/Ground Front.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Sprites/Background/Pink Purple Rock/Rocks.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Sprites/Background/Pink Purple Rock/Ground.png" type="Texture" id=10]
 
 [node name="Room" type="Node2D"]
 script = ExtResource( 1 )
@@ -119,6 +124,56 @@ scale = Vector2( 1.5, 1.5 )
 initBoardPos = Vector2( 2, 2 )
 
 [node name="Portal" parent="Units" instance=ExtResource( 5 )]
-position = Vector2( 512, 256 )
-initBoardPos = Vector2( 1, 3 )
+position = Vector2( 512, 320 )
+initBoardPos = Vector2( 2, 3 )
 nextRoom = "Room2"
+
+[node name="Turret" parent="Units" instance=ExtResource( 6 )]
+position = Vector2( 576, 256 )
+initBoardPos = Vector2( 1, 4 )
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+scale = Vector2( 2, 2 )
+transform = Transform2D( 2, 0, 0, 2, 0, 0 )
+
+[node name="Background" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( -0.5, 0 )
+motion_mirroring = Vector2( 480, 240 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/Background"]
+texture = ExtResource( 7 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 480, 240 )
+
+[node name="Ground" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2( 0, 32 )
+motion_scale = Vector2( 2, 0 )
+motion_mirroring = Vector2( 480, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/Ground"]
+texture = ExtResource( 10 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 480, 240 )
+
+[node name="Ground Front" type="ParallaxLayer" parent="ParallaxBackground"]
+position = Vector2( 0, 32 )
+motion_scale = Vector2( 1, 0 )
+motion_mirroring = Vector2( 480, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/Ground Front"]
+texture = ExtResource( 8 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 480, 240 )
+
+[node name="Rocks" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0, 1 )
+motion_mirroring = Vector2( 480, 240 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/Rocks"]
+texture = ExtResource( 9 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 480, 240 )
