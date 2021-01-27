@@ -17,5 +17,14 @@
     * Have a portal to the next room
     * Drop down transition when entering and exiting a room
 
+# Moving with actual speed? (maybe)
+* Updating m_vBoardPos and global_position in the set_board_pos() function
+* There are 2 position: m_vBoardPos and global_position
+* m_vBoardPos are actual position that will be used when checking for contact between units (highlighted on tile)
+* global_position are position that are gradually updated each time the m_vBoardPos is updated, with specified moving speed
+* For example: when player pressed right, the m_vBoardPos is updated with y += 1, and global_position += speed * delta until it moved a distance of tile.width
+* m_vDistanceLeft: Vector2
+* while abs(m_vDistanceLeft.x) > 0: global_position.x += speed * delta (same for y axis)
+
 # Đang làm dở
-* Maybe just start off making a boss?
+* Find boss assets with 2 or more attacks

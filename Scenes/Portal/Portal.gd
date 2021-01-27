@@ -13,7 +13,7 @@ func _init():
 func _ready():
 	assert(nextRoom)
 	animP.play("Default")
-	room.connect("unit_moved", self, "_on_unit_moved")
+	m_nRoom.connect("unit_moved", self, "_on_unit_moved")
 
 func _on_unit_moved(_unitType: int, _boardPos: Vector2):
 	if _unitType == UNIT_TYPE.PLAYER and _boardPos == self.boardPos:

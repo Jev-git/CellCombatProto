@@ -14,5 +14,5 @@ func _open_chest() -> void:
 	animS.play("Open")
 
 func _on_tile_damaged(tilePos: Vector2, isPlayerDmg: bool) -> void:
-	if tilePos == boardPos and isPlayerDmg:
+	if tilePos == m_vBoardPos and isPlayerDmg:
 		_open_chest()

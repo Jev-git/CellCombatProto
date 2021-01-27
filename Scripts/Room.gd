@@ -8,6 +8,7 @@ onready var m_aBoardLayout: Array
 
 onready var m_nBoard = $Board
 onready var m_nUnits = $Units
+onready var m_nPlayer: Player
 
 signal unit_moved
 signal tile_damaged
@@ -24,6 +25,9 @@ func _ready():
 	for unit in m_nUnits.get_children():
 		unit.set_board_pos(unit.INIT_BOARD_POS)
 		connect("tile_damaged", unit, "_on_tile_damaged")
+	
+	# Get Player node
+	m_nPlayer = get_tree().get_nodes_in_group("Player")[0]
 
 func get_tile(tilePos: Vector2) -> Tile:
 	if tilePos.x < 0 or tilePos.x > m_aBoardLayout.size() or tilePos.y < 0 or tilePos.y > m_aBoardLayout[0].size():
@@ -45,3 +49,9 @@ func is_tile_empty(tilePos: Vector2) -> bool:
 			if !unit.m_bCanShareTile and unit.m_vBoardPos == tilePos:
 				return false
 		return true
+
+func get_player_pos() -> Vector2:
+	return m_nPlayer.m_vBoardPos
+
+func get_room_size() -> Vector2:
+	return Vector2(m_aBoardLayout.size(), m_aBoardLayout[0].size())
