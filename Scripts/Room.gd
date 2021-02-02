@@ -3,7 +3,8 @@ class_name Room
 
 # Override these values in the _init() function of child rooms
 # ==========================================
-onready var m_aBoardLayout: Array
+var m_aBoardLayout: Array
+var m_vRoomSize: Vector2
 # ==========================================
 
 onready var m_nBoard = $Board
@@ -13,10 +14,12 @@ onready var m_nPlayer: Player
 signal tile_damaged
 
 func _ready():
+	m_vRoomSize = Vector2(m_aBoardLayout.size(), m_aBoardLayout[0].size())
+	
 	# Set up tiles from boardLayout
-	for i_row in range(m_nBoard.get_child_count()):
+	for i_row in range(m_vRoomSize.x):
 		var row = m_nBoard.get_child(i_row)
-		for i_col in range(row.get_child_count()):
+		for i_col in range(m_vRoomSize.y):
 			var tile: Tile = row.get_child(i_col)
 			tile.type = m_aBoardLayout[i_row][i_col]
 	
@@ -29,7 +32,7 @@ func _ready():
 	m_nPlayer = get_tree().get_nodes_in_group("Player")[0]
 
 func get_tile(tilePos: Vector2) -> Tile:
-	if tilePos.x < 0 or tilePos.x > m_aBoardLayout.size() or tilePos.y < 0 or tilePos.y > m_aBoardLayout[0].size():
+	if tilePos.x < 0 or tilePos.x > m_vRoomSize.x - 1 or tilePos.y < 0 or tilePos.y > m_vRoomSize.y - 1:
 		return null
 	return m_nBoard.get_child(tilePos.x).get_child(tilePos.y)
 
@@ -53,4 +56,4 @@ func get_player_pos() -> Vector2:
 	return m_nPlayer.m_vBoardPos
 
 func get_room_size() -> Vector2:
-	return Vector2(m_aBoardLayout.size(), m_aBoardLayout[0].size())
+	return m_vRoomSize
