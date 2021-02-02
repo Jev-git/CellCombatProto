@@ -10,6 +10,11 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Unit",
+"class": "BossWarrior",
+"language": "GDScript",
+"path": "res://Scenes/Enemies/Bosses/Warrior/Warrior.gd"
+}, {
+"base": "Unit",
 "class": "Chest",
 "language": "GDScript",
 "path": "res://Scenes/Props/Chest/Chest.gd"
@@ -50,6 +55,7 @@ _global_script_classes=[ {
 "path": "res://Scripts/Unit.gd"
 } ]
 _global_script_class_icons={
+"BossWarrior": "",
 "Chest": "",
 "EnemyGuardian": "",
 "Player": "",

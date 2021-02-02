@@ -3,7 +3,7 @@
 [ext_resource path="res://Scenes/Room/RoomBossTest.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Tile/Tile.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Scenes/Enemies/Mobs/Guardian/Guardian.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Enemies/Bosses/Warrior/Warrior.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/Sprites/Background/Pink Purple Rock/Background.png" type="Texture" id=7]
 [ext_resource path="res://Assets/Sprites/Background/Pink Purple Rock/Ground Front.png" type="Texture" id=8]
 [ext_resource path="res://Assets/Sprites/Background/Pink Purple Rock/Rocks.png" type="Texture" id=9]
@@ -116,9 +116,9 @@ position = Vector2( 384, 256 )
 scale = Vector2( 2, 2 )
 INIT_BOARD_POS = Vector2( 1, 1 )
 
-[node name="Guardian" parent="Units" instance=ExtResource( 4 )]
+[node name="Warrior" parent="Units" instance=ExtResource( 4 )]
 position = Vector2( 576, 256 )
-scale = Vector2( -2, 2 )
+scale = Vector2( -1.5, 1.5 )
 INIT_BOARD_POS = Vector2( 1, 4 )
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]

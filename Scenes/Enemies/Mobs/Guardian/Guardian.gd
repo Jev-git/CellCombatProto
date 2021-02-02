@@ -19,17 +19,6 @@ func _ready():
 	m_nAnimP.play("Hidden")
 	_test_attack()
 
-func _set_facing_to_player():
-	var playerPos: Vector2 = m_nRoom.get_player_pos()
-	_set_facing_right(!(playerPos.y < m_vBoardPos.y))
-
-func _set_pos_align_with_player():
-	var playerPos: Vector2 = m_nRoom.get_player_pos()
-	var roomSize: Vector2 = m_nRoom.get_room_size()
-	var _x = playerPos.x
-	var _y = 0 if (playerPos.y + 1) > roomSize.y / 2 else roomSize.y - 1
-	set_board_pos(Vector2(_x, _y))
-
 func _test_attack():
 	yield(get_tree().create_timer(randf() * 3.0), "timeout")
 	_set_pos_align_with_player()

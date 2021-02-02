@@ -27,4 +27,5 @@
 * while abs(m_vDistanceLeft.x) > 0: global_position.x += speed * delta (same for y axis)
 
 # Đang làm dở
-* Find boss assets with 2 or more attacks
+* Warrior boss:
+    * Cycle through imported animation and decide some attacks, then add animation and logic for them

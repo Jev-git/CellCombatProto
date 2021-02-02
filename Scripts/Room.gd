@@ -10,7 +10,6 @@ onready var m_nBoard = $Board
 onready var m_nUnits = $Units
 onready var m_nPlayer: Player
 
-signal unit_moved
 signal tile_damaged
 
 func _ready():

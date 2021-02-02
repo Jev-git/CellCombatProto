@@ -46,11 +46,8 @@ func _handle_input() -> void:
 		elif m_bIsStanceCharged:
 			# Special attack (and leave stance)
 			if Input.is_action_just_pressed("ui_attack"):
-				m_bAcceptingInput = false
 				m_bIsInStance = false
-				m_nAnimS.play("Special")
-				m_nAnimP.play("Default")
-				_deal_dmg_to_tile("Special")
+				_play_anim_and_deal_damage("Special")
 		return
 	
 	if m_bIsInStance: # Leave Stance
@@ -61,9 +58,7 @@ func _handle_input() -> void:
 	
 	# Attack
 	if Input.is_action_just_pressed("ui_attack"):
-		m_nAnimS.play("Attack")
-		_deal_dmg_to_tile("Attack")
-		m_bAcceptingInput = false
+		_play_anim_and_deal_damage("Attack")
 		return
 	
 	# Movement
@@ -77,20 +72,23 @@ func _handle_input() -> void:
 		set_board_pos(Vector2(m_vBoardPos.x + 1, m_vBoardPos.y))
 	m_nAnimS.play("Default")
 
-func _deal_dmg_to_tile(_animName: String) -> void:
+func _play_anim_and_deal_damage(_animName: String) -> void:
+	m_nAnimS.play(_animName)
+	m_bAcceptingInput = false
+	
 	match _animName:
 		"Attack":
 			var aheadPos = Vector2(m_vBoardPos.x, m_vBoardPos.y + (1 if m_bIsFacingRight else -1))
 			m_nRoom.deal_damage_to_tile(aheadPos, true)
 		"Special":
+			m_nAnimP.play("Default")
 			var aheadPos = Vector2(m_vBoardPos.x, m_vBoardPos.y + (1 if m_bIsFacingRight else -1))
 			m_nRoom.deal_damage_to_tile(aheadPos, true)
 			aheadPos = Vector2(m_vBoardPos.x, m_vBoardPos.y + (2 if m_bIsFacingRight else -2))
 			m_nRoom.deal_damage_to_tile(aheadPos, true)
 
-func _on_tile_damaged(tilePos: Vector2, isPlayerDmg: bool) -> void:
-	if tilePos == m_vBoardPos:
-		print("Player received damage")
+func _receive_damage() -> void:
+	print("Player received damage")
 
 func _on_stance_timer_timeout():
 	m_bIsStanceCharged = true
