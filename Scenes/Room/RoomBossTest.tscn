@@ -166,3 +166,6 @@ texture = ExtResource( 9 )
 centered = false
 region_enabled = true
 region_rect = Rect2( 0, 0, 480, 240 )
+
+[node name="UpperBoundPosition" type="Position2D" parent="."]
+position = Vector2( 0, -192 )

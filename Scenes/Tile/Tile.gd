@@ -11,7 +11,7 @@ func set_type(_type) -> void:
 		$Types.get_child(i).visible = true if i == _type else false
 	type = _type
 
-func flash(isPlayerDmg: bool) -> void:
+func flash(isPlayerDmg: bool = false) -> void:
 	if isPlayerDmg:
 		$Flashs/YellowFlash.visible = true
 	else:

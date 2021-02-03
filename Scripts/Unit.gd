@@ -62,3 +62,15 @@ func _set_pos_align_with_player(_sameSideAsPlayer: bool = false) -> void:
 	else:
 		_y = 0 if (playerPos.y + 1) > roomSize.y / 2 else roomSize.y - 1
 	set_board_pos(Vector2(_x, _y))
+
+func _set_pos_behind_player() -> void:
+	var playerPos: Vector2 = m_nRoom.get_player_pos()
+	var _x = playerPos.x
+	var _y: int
+	if playerPos.y > 0 and m_nRoom.m_nPlayer.m_bIsFacingRight:
+		_y = playerPos.y - 1
+	elif playerPos.y < m_nRoom.get_room_size().y and !m_nRoom.m_nPlayer.m_bIsFacingRight:
+		_y = playerPos.y + 1
+	else:
+		assert(false)
+	set_board_pos(Vector2(_x, _y))
