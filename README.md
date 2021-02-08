@@ -27,5 +27,5 @@
 * while abs(m_vDistanceLeft.x) > 0: global_position.x += speed * delta (same for y axis)
 
 # Đang làm dở
-* Warrior boss:
-    * Cycle through imported animation and decide some attacks, then add animation and logic for them
+* Finalize warrior boss:
+    * After the boss has these attacks: teleport behind and hit, jump down, slash projectile, mind attack (require player to turn around), make a simple state machine/AI script for the boss to fight the player properly

@@ -3,11 +3,11 @@ class_name Player
 
 onready var m_nAnimS: AnimatedSprite = $AnimatedSprite
 onready var m_nAnimP: AnimationPlayer = $AnimationPlayer
-onready var m_nStanceTimer: Timer = $StanceTimer
+onready var m_nChargeAttackTimer: Timer = $ChargeAttackTimer
 
 onready var m_bAcceptingInput: bool = true
-onready var m_bIsInStance: bool = false
-onready var m_bIsStanceCharged: bool = false
+onready var m_bIsAttackCharging: bool = false
+onready var m_bIsAttackCharged: bool = false
 
 func _init():
 	m_iUnitType = UNIT_TYPE.PLAYER
@@ -15,7 +15,7 @@ func _init():
 
 func _ready():
 	m_nAnimS.connect("animation_finished", self, "_on_anim_finished")
-	m_nStanceTimer.connect("timeout", self, "_on_stance_timer_timeout")
+	m_nChargeAttackTimer.connect("timeout", self, "_on_stance_timer_timeout")
 
 func _process(delta):
 	_handle_input()
@@ -28,38 +28,33 @@ func _on_anim_finished() -> void:
 func _handle_input() -> void:
 	if !m_bAcceptingInput: return
 	
-	# In Stance
-	if Input.is_action_pressed("ui_stance"):
-		# You can always turn whether charged or not
-		if Input.is_action_just_pressed("ui_right"):
-			if !m_bIsFacingRight: # Turn
-				_set_facing_right(true)
-		elif Input.is_action_just_pressed("ui_left"):
-			if m_bIsFacingRight: # Turn
-				_set_facing_right(false)
-		
-		if !m_bIsInStance: # Enter Stance
-			m_bIsInStance = true
-			m_nStanceTimer.start()
-			m_nAnimS.play("Stance")
-			m_nAnimP.play("Stance")
-		elif m_bIsStanceCharged:
-			# Special attack (and leave stance)
-			if Input.is_action_just_pressed("ui_attack"):
-				m_bIsInStance = false
-				_play_anim_and_deal_damage("Special")
-		return
-	
-	if m_bIsInStance: # Leave Stance
-		m_bIsInStance = false
-		m_bIsStanceCharged = false
-		m_nAnimP.play("Default")
-		m_nStanceTimer.stop()
+	# Turn around
+	if Input.is_action_just_pressed("ui_turn"):
+		_set_facing_right(!m_bIsFacingRight)
 	
 	# Attack
 	if Input.is_action_just_pressed("ui_attack"):
 		_play_anim_and_deal_damage("Attack")
 		return
+	
+	# Charge attack (charging)
+	if Input.is_action_pressed("ui_attack"):
+		if !m_bIsAttackCharging and !m_bIsAttackCharged: # Start charging
+			m_bIsAttackCharging = true
+			m_nChargeAttackTimer.start()
+			m_nAnimS.play("Charge")
+			m_nAnimP.play("Charge")
+		return
+	
+	# Charge attack
+	if Input.is_action_just_released("ui_attack"):
+		if m_bIsAttackCharged:
+			m_bIsAttackCharged = false
+			_play_anim_and_deal_damage("Special")
+			return
+		m_bIsAttackCharging = false
+		m_nAnimP.play("Default")
+		m_nChargeAttackTimer.stop()
 	
 	# Movement
 	if Input.is_action_just_pressed("ui_right"):
@@ -91,4 +86,5 @@ func _receive_damage() -> void:
 	print("Player received damage")
 
 func _on_stance_timer_timeout():
-	m_bIsStanceCharged = true
+	m_bIsAttackCharged = true
+	m_bIsAttackCharging = false

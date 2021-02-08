@@ -16,7 +16,7 @@ func _init():
 func _ready():
 	m_nAnimP.play("Idle")
 	m_nJumpAtkTimer.connect("timeout", self, "_start_falling_down")
-	_do_jump_attack()
+#	_do_jump_attack()
 
 func _process(delta):
 	_process_jump_attack(delta)

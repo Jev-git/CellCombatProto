@@ -23,16 +23,6 @@ animations = [ {
 "name": "Default",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 1 ) ],
-"loop": true,
-"name": "Stance",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 8 ), ExtResource( 10 ), ExtResource( 7 ), ExtResource( 9 ) ],
-"loop": true,
-"name": "Special",
-"speed": 12.0
-}, {
 "frames": [ ExtResource( 6 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 3 ) ],
 "loop": true,
 "name": "Attack",
@@ -42,24 +32,20 @@ animations = [ {
 "loop": true,
 "name": "Dash",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 8 ), ExtResource( 10 ), ExtResource( 7 ), ExtResource( 9 ) ],
+"loop": true,
+"name": "Special",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "Charge",
+"speed": 5.0
 } ]
 
-[sub_resource type="Animation" id=2]
-resource_name = "Default"
-tracks/0/type = "value"
-tracks/0/path = NodePath("FlareSprite:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-
 [sub_resource type="Animation" id=3]
+resource_name = "Charge"
 tracks/0/type = "value"
 tracks/0/path = NodePath("FlareSprite:visible")
 tracks/0/interp = 1
@@ -97,6 +83,21 @@ tracks/2/keys = {
 "values": [ Vector2( 0.05, 0.05 ), Vector2( 0.1, 0.1 ) ]
 }
 
+[sub_resource type="Animation" id=2]
+resource_name = "Default"
+tracks/0/type = "value"
+tracks/0/path = NodePath("FlareSprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
 [node name="Player" type="Node2D" groups=[
 "Player",
 ]]
@@ -108,15 +109,15 @@ position = Vector2( 0, -16 )
 frames = SubResource( 1 )
 animation = "Default"
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Charge = SubResource( 3 )
+anims/Default = SubResource( 2 )
+
 [node name="FlareSprite" type="Sprite" parent="."]
 visible = false
-position = Vector2( -16.878, 1.01857 )
-scale = Vector2( 0.1, 0.1 )
+position = Vector2( -10.6908, -5.34539 )
+scale = Vector2( 0.05, 0.05 )
 texture = ExtResource( 15 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Default = SubResource( 2 )
-anims/Stance = SubResource( 3 )
-
-[node name="StanceTimer" type="Timer" parent="."]
+[node name="ChargeAttackTimer" type="Timer" parent="."]
 one_shot = true
