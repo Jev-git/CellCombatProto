@@ -27,5 +27,9 @@
 * while abs(m_vDistanceLeft.x) > 0: global_position.x += speed * delta (same for y axis)
 
 # Đang làm dở
+* Range projectile:
+    * Self destruct when go out of board: self check from inside the script for the projectile
+    * Trigger damage when touch the player
+    * Transition the warrior to default animation
 * Finalize warrior boss:
     * After the boss has these attacks: teleport behind and hit, jump down, slash projectile, mind attack (require player to turn around), make a simple state machine/AI script for the boss to fight the player properly

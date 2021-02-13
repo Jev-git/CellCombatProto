@@ -3,6 +3,8 @@ class_name BossWarrior
 
 enum JUMP_ATTACK_PHASE {NONE, JUMPING, WAITING, FALLING}
 
+const m_nRangeProjectile: PackedScene = preload("Warrior Range Projectile.tscn")
+
 export var m_fJumpSpeed: float = 500.0
 
 onready var m_nAnimP: AnimationPlayer = $AnimationPlayer
@@ -17,6 +19,7 @@ func _ready():
 	m_nAnimP.play("Idle")
 	m_nJumpAtkTimer.connect("timeout", self, "_start_falling_down")
 #	_do_jump_attack()
+	_do_range_attack()
 
 func _process(delta):
 	_process_jump_attack(delta)
@@ -81,18 +84,24 @@ func _test_attack():
 	yield(get_tree().create_timer(randf() * 3.0), "timeout")
 	_set_pos_align_with_player(true)
 	_set_facing_to_player()
-	_play_anim_and_deal_damage("Attack3")
+	m_nAnimP.play("Attack3")
+	yield(get_tree().create_timer(0.3), "timeout")
+	var aheadPos = Vector2(m_vBoardPos.x, m_vBoardPos.y + (1 if m_bIsFacingRight else -1))
+	m_nRoom.deal_damage_to_tile(aheadPos)
 	yield(m_nAnimP, "animation_finished")
 	m_nAnimP.play("Idle")
 	_test_attack()
 
-func _play_anim_and_deal_damage(_animName: String) -> void:
-	m_nAnimP.play(_animName)
-	match _animName:
-		"Attack3":
-			yield(get_tree().create_timer(0.3), "timeout")
-			var aheadPos = Vector2(m_vBoardPos.x, m_vBoardPos.y + (1 if m_bIsFacingRight else -1))
-			m_nRoom.deal_damage_to_tile(aheadPos)
-
 func _receive_damage() -> void:
 	print("Warrior received damage")
+
+func _do_range_attack() -> void:
+	yield(get_tree().create_timer(randf() * 3.0), "timeout")
+	_set_facing_to_player()
+	m_nAnimP.play("Attack1")
+	yield(get_tree().create_timer(0.9), "timeout")
+	var projectile: EnemyProjectile_WarriorRangeProjectile = m_nRangeProjectile.instance()
+	var _x = m_vBoardPos.x
+	var _y = m_vBoardPos.y + (1 if m_bIsFacingRight else -1)
+	m_nRoom.add_unit(projectile)
+	projectile.init(Vector2(_x, _y))

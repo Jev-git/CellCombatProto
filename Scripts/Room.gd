@@ -57,3 +57,8 @@ func get_player_pos() -> Vector2:
 
 func get_room_size() -> Vector2:
 	return m_vRoomSize
+
+func add_unit(_unit: Unit) -> void:
+	_unit.m_nRoom = self
+	m_nUnits.add_child(_unit)
+	connect("tile_damaged", _unit, "_on_tile_damaged")

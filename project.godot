@@ -25,6 +25,11 @@ _global_script_classes=[ {
 "path": "res://Scenes/Enemies/Mobs/Guardian/Guardian.gd"
 }, {
 "base": "Unit",
+"class": "EnemyProjectile_WarriorRangeProjectile",
+"language": "GDScript",
+"path": "res://Scenes/Enemies/Bosses/Warrior/Warrior Range Projectile.gd"
+}, {
+"base": "Unit",
 "class": "Player",
 "language": "GDScript",
 "path": "res://Scenes/Player/Player.gd"
@@ -58,6 +63,7 @@ _global_script_class_icons={
 "BossWarrior": "",
 "Chest": "",
 "EnemyGuardian": "",
+"EnemyProjectile_WarriorRangeProjectile": "",
 "Player": "",
 "Portal": "",
 "Room": "",

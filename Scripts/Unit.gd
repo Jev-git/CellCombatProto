@@ -1,7 +1,7 @@
 extends Node2D
 class_name Unit
 
-enum UNIT_TYPE {PLAYER, ENEMY, PROP, PORTAL}
+enum UNIT_TYPE {PLAYER, ENEMY, ENEMY_PROJECTILE, PROP, PORTAL}
 
 export var INIT_BOARD_POS: Vector2
 
@@ -41,8 +41,6 @@ func _on_tile_damaged(_tilePos: Vector2, _isPlayerDmg: bool) -> void:
 # Virtual methods
 # ===============
 func _receive_damage() -> void:
-	pass
-func _play_anim_and_deal_damage(_animName: String) -> void:
 	pass
 # ===============
 
