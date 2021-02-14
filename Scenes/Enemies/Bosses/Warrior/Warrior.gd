@@ -19,7 +19,7 @@ func _ready():
 	m_nAnimP.play("Idle")
 	m_nJumpAtkTimer.connect("timeout", self, "_start_falling_down")
 #	_do_jump_attack()
-	_do_range_attack()
+	_do_range_attack_sequence()
 
 func _process(delta):
 	_process_jump_attack(delta)
@@ -95,13 +95,27 @@ func _test_attack():
 func _receive_damage() -> void:
 	print("Warrior received damage")
 
-func _do_range_attack() -> void:
-	yield(get_tree().create_timer(randf() * 3.0), "timeout")
-	_set_facing_to_player()
+func _do_range_attack_sequence(_attackLeft: int = 4) -> void:
+	yield(get_tree().create_timer(randf() * 0.5), "timeout")
+	_set_pos_for_range_attack()
 	m_nAnimP.play("Attack1")
 	yield(get_tree().create_timer(0.9), "timeout")
 	var projectile: EnemyProjectile_WarriorRangeProjectile = m_nRangeProjectile.instance()
 	var _x = m_vBoardPos.x
 	var _y = m_vBoardPos.y + (1 if m_bIsFacingRight else -1)
 	m_nRoom.add_unit(projectile)
-	projectile.init(Vector2(_x, _y))
+	projectile.init(Vector2(_x, _y), m_vBoardPos.y < m_nRoom.get_player_pos().y)
+	yield(m_nAnimP, "animation_finished")
+	m_nAnimP.play("Idle")
+	if _attackLeft > 1:
+		_do_range_attack_sequence(_attackLeft - 1)
+
+func _set_pos_for_range_attack() -> void:
+	var roomSize: Vector2 = m_nRoom.get_room_size()
+	var _x: int = 1 if randf() <= 0.5 else 2
+	var _y: int = 0 if randf() <= 0.5 else roomSize.y - 1
+	set_board_pos(Vector2(_x, _y))
+	_set_facing_to_player()
+
+func _do_mental_attack() -> void:
+	pass

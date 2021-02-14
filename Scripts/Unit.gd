@@ -18,7 +18,7 @@ var m_bCanShareTile: bool
 # Common functions for all units
 # ==============================
 func set_board_pos(_boardPos: Vector2) -> void:
-	if !m_nRoom.is_tile_empty(_boardPos):
+	if !m_bCanShareTile and !m_nRoom.is_tile_empty(_boardPos):
 		return
 	
 	var targetTile: Tile = m_nRoom.get_tile(_boardPos)
