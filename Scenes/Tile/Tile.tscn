@@ -9,6 +9,7 @@
 [ext_resource path="res://Assets/Sprites/Tiles/YellowFlash.png" type="Texture" id=7]
 
 [node name="Tile" type="Node2D"]
+z_index = -100
 script = ExtResource( 4 )
 
 [node name="Types" type="Node2D" parent="."]

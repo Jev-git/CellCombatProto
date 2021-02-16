@@ -4,6 +4,7 @@ class_name BossWarrior
 enum JUMP_ATTACK_PHASE {NONE, JUMPING, WAITING, FALLING}
 
 const m_nRangeProjectile: PackedScene = preload("Warrior Range Projectile.tscn")
+const m_nPsychicBackground: PackedScene = preload("Warrior Psychic Background.tscn")
 
 export var m_fJumpSpeed: float = 500.0
 
@@ -19,7 +20,8 @@ func _ready():
 	m_nAnimP.play("Idle")
 	m_nJumpAtkTimer.connect("timeout", self, "_start_falling_down")
 #	_do_jump_attack()
-	_do_range_attack_sequence()
+#	_do_range_attack_sequence()
+	_do_psychic_attack()
 
 func _process(delta):
 	_process_jump_attack(delta)
@@ -112,10 +114,15 @@ func _do_range_attack_sequence(_attackLeft: int = 4) -> void:
 
 func _set_pos_for_range_attack() -> void:
 	var roomSize: Vector2 = m_nRoom.get_room_size()
-	var _x: int = 1 if randf() <= 0.5 else 2
-	var _y: int = 0 if randf() <= 0.5 else roomSize.y - 1
+	randomize()
+	var _x: int = (1 if randf() <= 0.5 else 2)
+	var _y: int = (0 if randf() <= 0.5 else roomSize.y - 1)
 	set_board_pos(Vector2(_x, _y))
 	_set_facing_to_player()
 
-func _do_mental_attack() -> void:
-	pass
+func _do_psychic_attack() -> void:
+	yield(get_tree().create_timer(1.0), "timeout")
+	m_nAnimP.play("Psychic")
+	yield(get_tree().create_timer(0.7), "timeout")
+	var psychicBackground = m_nPsychicBackground.instance()
+	add_child(psychicBackground)

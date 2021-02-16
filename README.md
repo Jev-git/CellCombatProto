@@ -28,7 +28,9 @@
 
 # Đang làm dở
 * Mental attack:
+    * Effect: a pan out effect (shader?) from the middle of the screen: . o O <- kinda like this (watch the shader videos in utube watch later list)
     * Stun (player need to turn around)
+* Defend and counter-attack (like Hornet): hold the sword up. If the player attacks, the Warrior also attack back
 * Finalize warrior boss:
     * After the boss has these attacks: teleport behind and hit, jump down, slash projectile, mind attack (require player to turn around), make a simple state machine/AI script for the boss to fight the player properly
     * Add proper telegraph where needed
