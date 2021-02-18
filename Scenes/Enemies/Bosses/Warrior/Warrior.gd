@@ -126,3 +126,7 @@ func _do_psychic_attack() -> void:
 	yield(get_tree().create_timer(0.7), "timeout")
 	var psychicBackground = m_nPsychicBackground.instance()
 	add_child(psychicBackground)
+	yield(get_tree().create_timer(1.0), "timeout")
+	m_nRoom.play_fx("Shockwave")
+	yield(get_tree().create_timer(0.3), "timeout")
+	m_nAnimP.play("Idle")

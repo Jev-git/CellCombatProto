@@ -11,6 +11,8 @@ onready var m_nBoard = $Board
 onready var m_nUnits = $Units
 onready var m_nPlayer: Player
 
+onready var m_nAnimP: AnimationPlayer = $AnimationPlayer
+
 signal tile_damaged
 
 func _ready():
@@ -62,3 +64,6 @@ func add_unit(_unit: Unit) -> void:
 	_unit.m_nRoom = self
 	m_nUnits.add_child(_unit)
 	connect("tile_damaged", _unit, "_on_tile_damaged")
+
+func play_fx(_fxName: String) -> void:
+	m_nAnimP.play(_fxName)

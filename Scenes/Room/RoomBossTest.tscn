@@ -1,13 +1,37 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scenes/Room/RoomBossTest.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Tile/Tile.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Enemies/Bosses/Warrior/Warrior.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Shaders/shockwave.shader" type="Shader" id=5]
 [ext_resource path="res://Assets/Sprites/Background/Pink Purple Rock/Background.png" type="Texture" id=7]
 [ext_resource path="res://Assets/Sprites/Background/Pink Purple Rock/Ground Front.png" type="Texture" id=8]
 [ext_resource path="res://Assets/Sprites/Background/Pink Purple Rock/Rocks.png" type="Texture" id=9]
 [ext_resource path="res://Assets/Sprites/Background/Pink Purple Rock/Ground.png" type="Texture" id=10]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 5 )
+shader_param/center = Vector2( 0.5, 0.5 )
+shader_param/force = 0.1
+shader_param/radius = 0.0
+shader_param/thickness = 0.1
+
+[sub_resource type="Animation" id=2]
+resource_name = "Shockwave"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("FullscreenFXLayer/ShockwaveFX:material:shader_param/radius")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 2.0 ]
+}
 
 [node name="Room" type="Node2D"]
 script = ExtResource( 1 )
@@ -169,3 +193,16 @@ region_rect = Rect2( 0, 0, 480, 240 )
 
 [node name="UpperBoundPosition" type="Position2D" parent="."]
 position = Vector2( 0, -192 )
+
+[node name="FullscreenFXLayer" type="CanvasLayer" parent="."]
+
+[node name="ShockwaveFX" type="ColorRect" parent="FullscreenFXLayer"]
+material = SubResource( 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Shockwave = SubResource( 2 )
