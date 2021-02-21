@@ -131,7 +131,7 @@ tracks/0/keys = {
 "values": [ 60, 62 ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=9]
 resource_name = "Psychic"
 length = 2.0
 tracks/0/type = "value"
@@ -183,8 +183,5 @@ anims/Fall = SubResource( 5 )
 anims/Hurt = SubResource( 6 )
 anims/Idle = SubResource( 7 )
 anims/Jump = SubResource( 8 )
-anims/Psychic = SubResource( 11 )
+anims/Psychic = SubResource( 9 )
 anims/Run = SubResource( 10 )
-
-[node name="JumpAttackWaitTimer" type="Timer" parent="."]
-one_shot = true
