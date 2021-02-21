@@ -103,6 +103,7 @@ func get_stunned():
 	m_nStunnedTimer.start()
 
 func _clear_stun_state():
+	m_bAcceptingInput = true
 	m_bIsStunned = false
 	m_nAnimS.play("Default")
 	m_nAnimP.play("Default")
