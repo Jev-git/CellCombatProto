@@ -2,6 +2,7 @@
 * Deal damage (atk: 1 square ahead, special: 2 square ahead)
 * Take damage
 * Sub weapon (like gem in Hades)
+* Parry? (like in Cyber Shadow): Forward to stop projectile, attack to send it back
 
 # Enemy
 * Simple one:
@@ -27,8 +28,6 @@
 * while abs(m_vDistanceLeft.x) > 0: global_position.x += speed * delta (same for y axis)
 
 # Đang làm dở
-* Mental attack:
-    * Stun (player need to turn around)
 * Defend and counter-attack (like Hornet): hold the sword up. If the player attacks, the Warrior also attack back
 * Finalize warrior boss:
     * After the boss has these attacks: teleport behind and hit, jump down, slash projectile, mind attack (require player to turn around), make a simple state machine/AI script for the boss to fight the player properly

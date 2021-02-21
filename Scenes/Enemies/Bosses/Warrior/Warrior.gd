@@ -19,6 +19,7 @@ func _init():
 func _ready():
 	m_nAnimP.play("Idle")
 	m_nJumpAtkTimer.connect("timeout", self, "_start_falling_down")
+	m_bIsFacingRight = false
 #	_do_jump_attack()
 #	_do_range_attack_sequence()
 	_do_psychic_attack()
@@ -128,5 +129,11 @@ func _do_psychic_attack() -> void:
 	add_child(psychicBackground)
 	yield(get_tree().create_timer(1.0), "timeout")
 	m_nRoom.play_fx("Shockwave")
+	
+	# If player is facing the Warrior, they will get stunned
+	var player: Player = m_nRoom.m_nPlayer
+	if player.m_bIsFacingRight != m_bIsFacingRight:
+		player.get_stunned()
+	
 	yield(get_tree().create_timer(0.3), "timeout")
 	m_nAnimP.play("Idle")

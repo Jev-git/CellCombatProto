@@ -4,10 +4,12 @@ class_name Player
 onready var m_nAnimS: AnimatedSprite = $AnimatedSprite
 onready var m_nAnimP: AnimationPlayer = $AnimationPlayer
 onready var m_nChargeAttackTimer: Timer = $ChargeAttackTimer
+onready var m_nStunnedTimer: Timer = $StunnedTimer
 
 onready var m_bAcceptingInput: bool = true
 onready var m_bIsAttackCharging: bool = false
 onready var m_bIsAttackCharged: bool = false
+onready var m_bIsStunned: bool = false
 
 func _init():
 	m_iUnitType = UNIT_TYPE.PLAYER
@@ -16,9 +18,11 @@ func _init():
 func _ready():
 	m_nAnimS.connect("animation_finished", self, "_on_anim_finished")
 	m_nChargeAttackTimer.connect("timeout", self, "_on_stance_timer_timeout")
+	m_nStunnedTimer.connect("timeout", self, "_clear_stun_state")
 
 func _process(delta):
-	_handle_input()
+	if !m_bIsStunned:
+		_handle_input()
 
 func _on_anim_finished() -> void:
 	if !m_bAcceptingInput:
@@ -88,3 +92,17 @@ func _receive_damage() -> void:
 func _on_stance_timer_timeout():
 	m_bIsAttackCharged = true
 	m_bIsAttackCharging = false
+
+func get_stunned():
+	m_bAcceptingInput = false
+	m_bIsAttackCharging = false
+	m_bIsAttackCharged = false
+	m_bIsStunned = true
+	m_nAnimS.play("Hurt")
+	m_nAnimP.play("Stunned")
+	m_nStunnedTimer.start()
+
+func _clear_stun_state():
+	m_bIsStunned = false
+	m_nAnimS.play("Default")
+	m_nAnimP.play("Default")
