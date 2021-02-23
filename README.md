@@ -8,3 +8,5 @@
 * Melee combat helps inscrease the speed and intensity of the fight
 ## Revisit/Continue this prototype?
 Note [here](./note.txt)
+# Play the prototype
+Download the .exe file and .pck file from [here](https://github.com/Jev-git/CellCombatProto/releases)
